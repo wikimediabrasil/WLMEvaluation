@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktranslate with pos=pair.position %}Pair {{ pos }} of {{ total }}{% endblocktranslate %} ·
+    {{ campaign.name }}{% endblock %}
+{% block content %}
+    <div class="vote-bar">
+        <strong>{{ campaign.name }}</strong>
+        <span>{% blocktranslate with pos=pair.position %}Pair {{ pos }} of {{ total }}{% endblocktranslate %}</span>
+        <progress max="{{ total }}" value="{{ done }}" aria-label="{% translate 'Pairs voted' %}"></progress>
+        {% if pair.position > 1 %}
+            <a id="prev"
+               href="{% url 'evaluations:pair' campaign.id pair.position|add:'-1' %}">{% translate "Previous pair" %}</a>
+        {% endif %}
+    </div>
+
+    <form method="post" id="vote-form">
+        {% csrf_token %}
+        <div class="duel">
+            <figure class="side {% if pair.choice == 'L' %}chosen{% endif %}">
+                <button name="choice" value="L" data-key="L" {% if not can_vote %}disabled{% endif %}
+                        aria-label="{% translate 'Left is better' %}">
+                    <img src="{{ pair.left.thumb }}" alt="{{ pair.left.filename }}">
+                </button>
+                <figcaption>
+                    <a href="{{ pair.left.page_url }}" target="_blank" rel="noopener">{{ pair.left.filename }}</a>
+                </figcaption>
+            </figure>
+            <figure class="side {% if pair.choice == 'R' %}chosen{% endif %}">
+                <button name="choice" value="R" data-key="R" {% if not can_vote %}disabled{% endif %}
+                        aria-label="{% translate 'Right is better' %}">
+                    <img src="{{ pair.right.thumb }}" alt="{{ pair.right.filename }}">
+                </button>
+                <figcaption>
+                    <a href="{{ pair.right.page_url }}" target="_blank" rel="noopener">{{ pair.right.filename }}</a>
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="vote-actions">
+            <button class="button {% if pair.choice == 'L' %}current{% endif %}" name="choice" value="L"
+                    {% if not can_vote %}disabled{% endif %}>
+                ← {% translate "Left is better" %}
+            </button>
+            <button class="button {% if pair.choice == 'T' %}current{% endif %}" name="choice" value="T" data-key="T"
+                    {% if not can_vote %}disabled{% endif %}>
+                ↓ {% translate "Tie" %}
+            </button>
+            <button class="button {% if pair.choice == 'R' %}current{% endif %}" name="choice" value="R"
+                    {% if not can_vote %}disabled{% endif %}>
+                {% translate "Right is better" %} →
+            </button>
+        </div>
+    </form>
+
+    {% if can_vote %}
+        <p class="vote-keys">{% translate "Keyboard: ← or A left, → or D right, ↓ or S tie, Z previous pair." %}</p>
+    {% else %}
+        <p class="summary">
+            {% if juror.votes_locked %}{% translate "Your votes are locked because you opened the dashboard." %}
+            {% else %}{% translate "Voting is closed for this campaign." %}{% endif %}
+        </p>
+    {% endif %}
+
+    <script>
+      (function () {
+        var form = document.getElementById("vote-form");
+        var canVote = {{ can_vote|yesno:"true,false" }};
+
+        form.addEventListener("submit", function (e) {
+          if (form.dataset.sending) {
+            e.preventDefault();
+            return;
+          }
+          form.dataset.sending = "1";
+        });
+
+        function vote(k) {
+          if (!canVote) return;
+          form.requestSubmit(form.querySelector('[data-key="' + k + '"]'));
+        }
+
+        function go(id) {
+          var a = document.getElementById(id);
+          if (a) location.href = a.href;
+        }
+
+        var keys = {arrowleft: "L", a: "L", arrowright: "R", d: "R", arrowdown: "T", s: "T"};
+        document.addEventListener("keydown", function (e) {
+          if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+          var k = e.key.toLowerCase();
+          if (keys[k]) {
+            e.preventDefault();
+            vote(keys[k]);
+          } else if (k === "z") {
+            go("prev");
+          }
+        });
+      })();
+    </script>
+{% endblock %}

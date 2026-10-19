@@ -1,0 +1,43 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% translate "WLM pairwise judging" %}{% endblock %}</title>
+    <link rel="preconnect" href="https://tools-static.wmflabs.org/">
+    <link rel="stylesheet" type="text/css" href="https://tools-static.wmflabs.org/cdnjs/ajax/libs/w3-css/4.1.0/3/w3.css" integrity="sha384-zpQzwZF+OVRAxiWJkCQZW1UDlFH8BLPIGgoUpGnOOpZ2anNSIam44l1uk0CkfD+5" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' href='https://tools-static.wmflabs.org/fontcdn/css?family=Montserrat' integrity="sha384-o6O+z2fRKPqkzbKXVdov+vhSx01t7Zr4owXzQqMWIdj1/UwGvaQdbxMTwxD3YMtk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://tools-static.wmflabs.org/cdnjs/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha384-SOnAn/m2fVJCwnbEYgD4xzrPtvsXdElhOVvR8ND1YjB5nhGNwwf7nBQlhfAwHAZC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="{% url 'evaluations:home' %}">{% translate "WLM pairwise judging" %}</a>
+    <nav class="account" aria-label="{% translate 'Account' %}">
+        {% if user.is_authenticated %}
+            <span class="username" title="{{ user.username }}">{% blocktranslate with username=user.username %}Logged in as {{ username }}{% endblocktranslate %}</span>
+            <form method="post" action="{% url 'users:logout' %}">
+                {% csrf_token %}
+                <button type="submit">{% translate "Log out" %}</button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'social:begin' 'mediawiki' %}">
+                {% csrf_token %}
+                {% if request.GET.next %}<input type="hidden" name="next" value="{{ request.GET.next }}">{% endif %}
+                <button type="submit">{% translate "Log in with Wikimedia" %}</button>
+            </form>
+        {% endif %}
+    </nav>
+</header>
+<main class="w3-container">
+    {% block content %}{% endblock %}
+</main>
+<footer id="footer">
+    {% translate "This application was developed by Wikimedia Brasil" %}
+</footer>
+</body>
+</html>

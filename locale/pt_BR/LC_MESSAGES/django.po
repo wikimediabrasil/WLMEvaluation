@@ -1,0 +1,331 @@
+# WLM Evaluation tool.
+# Distributed under MIT License
+# Éder Porto <eder.porto@wmnobrasil.org>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 03:05-0300\n"
+"PO-Revision-Date: 2026-10-19 02:47-3\n"
+"Last-Translator: Éder Porto <eder.porto@wmnobrasil.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\evaluations\forms.py:15 .\evaluations\models.py:15
+msgid "Name"
+msgstr "Nome"
+
+#: .\evaluations\forms.py:16
+msgid "Commons files"
+msgstr "Arquivos do Commons"
+
+#: .\evaluations\forms.py:16
+msgid "One file name per line."
+msgstr "Um nome de arquivo por linha."
+
+#: .\evaluations\forms.py:17 .\evaluations\models.py:65
+msgid "Jurors"
+msgstr "Jurados"
+
+#: .\evaluations\forms.py:17
+msgid "One Wikimedia username per line."
+msgstr "Um nome de usuário(a) Wikimedia por linha."
+
+#: .\evaluations\forms.py:18
+msgid "Blocks per juror"
+msgstr "Blocos por jurado(a)"
+
+#: .\evaluations\forms.py:23
+msgid "Provide at least two files."
+msgstr "Informe pelo menos dois arquivos."
+
+#: .\evaluations\forms.py:29
+msgid "Provide at least one juror."
+msgstr "Informe pelo menos um jurado."
+
+#: .\evaluations\models.py:16
+msgid "Open for voting"
+msgstr "Aberta para votação"
+
+#: .\evaluations\models.py:17
+msgid "Coordinators"
+msgstr "Coordenação"
+
+#: .\evaluations\models.py:17
+msgid "One username per line, without 'User:'"
+msgstr "Um nome de usuário(a) por linha, sem o prefixo 'Usuário(a):'"
+
+#: .\evaluations\models.py:18
+msgid "results published"
+msgstr "resultados publicados"
+
+#: .\evaluations\models.py:19
+msgid "blocks per juror"
+msgstr "blocos por jurado(a)"
+
+#: .\evaluations\models.py:20
+msgid "random seed"
+msgstr "semente aleatória"
+
+#: .\evaluations\models.py:23
+msgid "Campaign"
+msgstr "Campanha"
+
+#: .\evaluations\models.py:24
+msgid "Campaigns"
+msgstr "Campanhas"
+
+#: .\evaluations\models.py:33
+msgid "File name"
+msgstr "Nome do arquivo"
+
+#: .\evaluations\models.py:34
+msgid "MID"
+msgstr "MID"
+
+#: .\evaluations\models.py:49
+msgid "Image"
+msgstr "Imagem"
+
+#: .\evaluations\models.py:50
+msgid "Images"
+msgstr "Imagens"
+
+#: .\evaluations\models.py:59
+msgid "username"
+msgstr "nome de usuário(a)"
+
+#: .\evaluations\models.py:60
+msgid "dashboard first seen at"
+msgstr "painel aberto pela primeira vez em"
+
+#: .\evaluations\models.py:64
+#: .\evaluations\templates\evaluations\results.html:37
+msgid "Juror"
+msgstr "Jurado(a)"
+
+#: .\evaluations\models.py:78
+msgid "left"
+msgstr "esquerda"
+
+#: .\evaluations\models.py:78
+msgid "right"
+msgstr "direita"
+
+#: .\evaluations\models.py:78
+msgid "tie"
+msgstr "empate"
+
+#: .\evaluations\models.py:93
+msgid "Pair"
+msgstr "Par"
+
+#: .\evaluations\models.py:94
+msgid "Pairs"
+msgstr "Pares"
+
+#: .\evaluations\templates\evaluations\_ranking.html:3
+#, python-format
+msgid "%(n)s vote"
+msgid_plural "%(n)s votes"
+msgstr[0] "%(n)s voto"
+msgstr[1] "%(n)s votos"
+
+#: .\evaluations\templates\evaluations\_ranking.html:4
+msgid "updated at"
+msgstr "atualizado às"
+
+#: .\evaluations\templates\evaluations\_ranking.html:18
+msgid "Top 10"
+msgstr "10 primeiras"
+
+#: .\evaluations\templates\evaluations\_ranking.html:36
+msgid "Full ranking"
+msgstr "Classificação completa"
+
+#: .\evaluations\templates\evaluations\_ranking.html:43
+msgid "File"
+msgstr "Arquivo"
+
+#: .\evaluations\templates\evaluations\_ranking.html:44
+msgid "Score"
+msgstr "Pontuação"
+
+#: .\evaluations\templates\evaluations\_ranking.html:45
+msgid "Wins"
+msgstr "Vitórias"
+
+#: .\evaluations\templates\evaluations\_ranking.html:46
+#: .\evaluations\templates\evaluations\results.html:39
+msgid "Ties"
+msgstr "Empates"
+
+#: .\evaluations\templates\evaluations\_ranking.html:47
+msgid "Losses"
+msgstr "Derrotas"
+
+#: .\evaluations\templates\evaluations\_ranking.html:67
+msgid "No votes yet for this selection."
+msgstr "Ainda não há votos para esta seleção."
+
+#: .\evaluations\templates\evaluations\campaign_form.html:5
+#: .\templates\home.html:54
+msgid "New campaign"
+msgstr "Nova campanha"
+
+#: .\evaluations\templates\evaluations\campaign_form.html:9
+msgid "Create campaign"
+msgstr "Criar campanha"
+
+#: .\evaluations\templates\evaluations\pair.html:3
+#: .\evaluations\templates\evaluations\pair.html:8
+#, python-format
+msgid "Pair %(pos)s of %(total)s"
+msgstr "Par %(pos)s de %(total)s"
+
+#: .\evaluations\templates\evaluations\pair.html:9
+msgid "Pairs voted"
+msgstr "Pares votados"
+
+#: .\evaluations\templates\evaluations\pair.html:12
+msgid "Previous pair"
+msgstr "Par anterior"
+
+#: .\evaluations\templates\evaluations\pair.html:21
+#: .\evaluations\templates\evaluations\pair.html:42
+msgid "Left is better"
+msgstr "A da esquerda é melhor"
+
+#: .\evaluations\templates\evaluations\pair.html:30
+#: .\evaluations\templates\evaluations\pair.html:50
+msgid "Right is better"
+msgstr "A da direita é melhor"
+
+#: .\evaluations\templates\evaluations\pair.html:46
+msgid "Tie"
+msgstr "Empate"
+
+#: .\evaluations\templates\evaluations\pair.html:56
+msgid "Keyboard: ← or A left, → or D right, ↓ or S tie, Z previous pair."
+msgstr "Teclado: ← ou A esquerda, → ou D direita, ↓ ou S empate, Z par anterior."
+
+#: .\evaluations\templates\evaluations\pair.html:59
+msgid "Your votes are locked because you opened the dashboard."
+msgstr "Seus votos estão bloqueados porque você abriu o painel."
+
+#: .\evaluations\templates\evaluations\pair.html:60
+msgid "Voting is closed for this campaign."
+msgstr "A votação desta campanha está encerrada."
+
+#: .\evaluations\templates\evaluations\results.html:3 .\templates\home.html:36
+#: .\templates\home.html:40
+msgid "Dashboard"
+msgstr "Painel"
+
+#: .\evaluations\templates\evaluations\results.html:10
+msgid "Votes from:"
+msgstr "Votos de:"
+
+#: .\evaluations\templates\evaluations\results.html:11
+msgid "whole jury"
+msgstr "júri inteiro"
+
+#: .\evaluations\templates\evaluations\results.html:19
+msgid "This is the ranking from your own votes. Your votes are now locked. "
+"The jury's results will be available when the campaign closes."
+msgstr "Esta é a classificação a partir dos seus próprios votos. Seus votos agora estão "
+"bloqueados. Os resultados do júri ficarão disponíveis quando a campanha for encerrada."
+
+#: .\evaluations\templates\evaluations\results.html:26
+msgid "Jury agreement"
+msgstr "Concordância do júri"
+
+#: .\evaluations\templates\evaluations\results.html:29
+msgid "Split-half reliability (whole jury):"
+msgstr "Confiabilidade entre metades (júri inteiro):"
+
+#: .\evaluations\templates\evaluations\results.html:38
+msgid "Agreement with the others"
+msgstr "Concordância com os demais"
+
+#: .\evaluations\templates\evaluations\results.html:40
+msgid "Votes"
+msgstr "Votos"
+
+#: .\evaluations\views.py:23
+#, python-format
+msgid "Campaign “%(name)s” created."
+msgstr "Campanha “%(name)s” criada."
+
+#: .\evaluations\views.py:61
+msgid "You have voted on every pair."
+msgstr "Você votou em todos os pares."
+
+#: .\templates\base.html:10 .\templates\base.html:19
+msgid "WLM pairwise judging"
+msgstr "Avaliação par a par do WLM"
+
+#: .\templates\base.html:20
+msgid "Account"
+msgstr "Conta"
+
+#: .\templates\base.html:22
+#, python-format
+msgid "Logged in as %(username)s"
+msgstr "Conectado como %(username)s"
+
+#: .\templates\base.html:25
+msgid "Log out"
+msgstr "Sair"
+
+#: .\templates\base.html:31 .\templates\home.html:64
+msgid "Log in with Wikimedia"
+msgstr "Entrar com a conta Wikimedia"
+
+#: .\templates\base.html:40
+msgid "This application was developed by Wikimedia Brasil"
+msgstr "Esta aplicação foi desenvolvida pela Wikimedia Brasil"
+
+#: .\templates\home.html:6
+#, python-format
+msgid "Hello, %(username)s"
+msgstr "Olá, %(username)s"
+
+#: .\templates\home.html:7
+msgid "Your campaigns"
+msgstr "Suas campanhas"
+
+#: .\templates\home.html:18
+msgid "votes locked"
+msgstr "votos bloqueados"
+
+#: .\templates\home.html:22
+msgid "Voting closed"
+msgstr "Votação encerrada"
+
+#: .\templates\home.html:29
+msgid "Vote"
+msgstr "Votar"
+
+#: .\templates\home.html:35
+msgid "Opening the dashboard locks your votes. Continue?"
+msgstr "Abrir o painel bloqueia seus votos. Continuar?"
+
+#: .\templates\home.html:49
+msgid "You are not a juror in any campaign yet. Ask the coordination to add your username."
+msgstr "Você ainda não é jurado em nenhuma campanha. Peça à coordenação para incluir seu nome de usuário."
+
+#: .\templates\home.html:59
+msgid "Compare Commons images, two at a time"
+msgstr "Compare imagens do Commons, duas de cada vez"
+
+#: .\templates\home.html:60
+msgid "Jurors choose the better of two images, pair by pair. "
+"The final ranking combines every vote of the jury."
+msgstr "Os jurados escolhem a melhor entre duas imagens, par a par. "
+"A classificação final combina todos os votos do júri."

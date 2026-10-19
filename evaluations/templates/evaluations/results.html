@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Dashboard" %} · {{ campaign.name }}{% endblock %}
+{% block content %}
+    <section class="results">
+        <h1>{{ campaign.name }}</h1>
+
+        {% if full_view %}
+            <p class="juror-filter">
+                {% translate "Votes from:" %}
+                <a href="?" {% if not selected %}aria-current="true"{% endif %}>{% translate "whole jury" %}</a>
+                {% for j in jurors %}
+                    <a href="?juror={{ j.username|urlencode }}"
+                       {% if selected == j.username %}aria-current="true"{% endif %}>{{ j.username }}</a>
+                {% endfor %}
+            </p>
+        {% else %}
+            <p class="summary">
+                {% translate "This is the ranking from your own votes. Your votes are now locked. The jury's results will be available when the campaign closes." %}
+            </p>
+        {% endif %}
+
+        <div id="live-ranking">{% include "evaluations/_ranking.html" %}</div>
+
+        {% if agreement %}
+            <h2>{% translate "Jury agreement" %}</h2>
+            {% if split_half %}
+                <p class="summary">
+                    {% translate "Split-half reliability (whole jury):" %}
+                    <strong>{{ split_half.full|floatformat:2 }}</strong>
+                </p>
+            {% endif %}
+            <div class="table-wrap">
+                <table class="ranking-table">
+                    <thead>
+                    <tr>
+                        <th>{% translate "Juror" %}</th>
+                        <th class="num">{% translate "Agreement with the others" %}</th>
+                        <th class="num">{% translate "Ties" %}</th>
+                        <th class="num">{% translate "Votes" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for a in agreement %}
+                        <tr>
+                            <td>{{ a.juror }}</td>
+                            <td class="num">
+                                {% if a.agreement is not None %}{% widthratio a.agreement 1 100 %}%{% else %}
+                                    —{% endif %}</td>
+                            <td class="num">{% if a.tie_rate is not None %}{% widthratio a.tie_rate 1 100 %}%{% else %}
+                                —{% endif %}</td>
+                            <td class="num">{{ a.votes }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </section>
+
+    {% if is_staff and campaign.is_open %}
+        <script>
+          (function () {
+            var box = document.getElementById("live-ranking");
+            var params = new URLSearchParams(location.search);
+            params.set("partial", "1");
+            var url = location.pathname + "?" + params.toString();
+            setInterval(function () {
+              if (document.hidden) return;
+              fetch(url, {credentials: "same-origin"})
+                .then(function (r) {
+                  return r.ok ? r.text() : null;
+                })
+                .then(function (html) {
+                  if (html) box.innerHTML = html;
+                });
+            }, 15000);
+          })();
+        </script>
+    {% endif %}
+{% endblock %}

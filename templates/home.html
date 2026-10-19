@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <section class="home">
+        {% if user.is_authenticated %}
+            <h1>{% blocktranslate with username=user.username %}Hello, {{ username }}{% endblocktranslate %}</h1>
+            <h2>{% translate "Your campaigns" %}</h2>
+
+            {% if rows %}
+                <ul class="campaign-list">
+                    {% for r in rows %}
+                        <li>
+                            <div class="campaign-info">
+                                <strong>{{ r.campaign.name }}</strong>
+                                {% if r.juror %}
+                                    <span class="count">
+                                        {{ r.juror.done }} / {{ r.juror.total }}
+                                        {% if r.juror.votes_locked %}· {% translate "votes locked" %}{% endif %}
+                                    </span>
+                                {% endif %}
+                                {% if not r.campaign.is_open %}
+                                    <span class="count">{% translate "Voting closed" %}</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="campaign-actions">
+                                {% if r.can_vote %}
+                                    <a class="button"
+                                       href="{% url 'evaluations:vote' r.campaign.id %}">{% translate "Vote" %}</a>
+                                {% endif %}
+                                {% if r.can_see_dashboard %}
+                                    {% if r.juror and not user.is_staff and not r.juror.votes_locked %}
+                                        <a class="button button-secondary"
+                                           href="{% url 'evaluations:results' r.campaign.id %}"
+                                           onclick="return confirm('{{ _("Opening the dashboard locks your votes. Continue?")|escapejs }}');">
+                                            {% translate "Dashboard" %}
+                                        </a>
+                                    {% else %}
+                                        <a class="button button-secondary"
+                                           href="{% url 'evaluations:results' r.campaign.id %}">{% translate "Dashboard" %}</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="w3-panel w3-border w3-round empty">
+                    {% translate "You are not a juror in any campaign yet. Ask the coordination to add your username." %}
+                </p>
+            {% endif %}
+
+            {% if user.is_staff %}
+                <p><a class="button" href="{% url 'evaluations:campaign_create' %}">{% translate "New campaign" %}</a>
+                </p>
+            {% endif %}
+
+        {% else %}
+            <h1>{% translate "Compare Commons images, two at a time" %}</h1>
+            <p>{% translate "Jurors choose the better of two images, pair by pair. The final ranking combines every vote of the jury." %}</p>
+            <form method="post" action="{% url 'social:begin' 'mediawiki' %}">
+                {% csrf_token %}
+                {% if request.GET.next %}<input type="hidden" name="next" value="{{ request.GET.next }}">{% endif %}
+                <button type="submit" class="button">{% translate "Log in with Wikimedia" %}</button>
+            </form>
+        {% endif %}
+    </section>
+{% endblock %}
