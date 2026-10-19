@@ -1,4 +1,4 @@
-Django~=6.1.2
+Django~=5.2.0
 social-auth-app-django~=7.1
 python-dotenv~=1.2.4
 mysqlclient>=2.2
